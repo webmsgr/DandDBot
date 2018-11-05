@@ -18,6 +18,6 @@ async def on_ready():
     print('------')
 async def diceroll(dice):
     rolls, limit = map(int, dice.split('d'))
-    rolls = [random.randint(1, limit)) for r in range(rolls)]
+    rolls = [random.randint(1, limit) for r in range(rolls)]
     return rolls
 bot.run(token)
