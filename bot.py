@@ -1,6 +1,6 @@
 #! python3
 import os
-if "key.secret" in os.listdir():
+if not "key.secret" in os.listdir():
     print("Please create key.secret and put your discord bot key inside.")
 
 import discord
