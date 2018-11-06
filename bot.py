@@ -3,10 +3,10 @@ import os
 if not "key.secret" in os.listdir():
     print("Please create key.secret and put your discord bot key inside.")
 spelld = {"First Level":{
-    "warp":"become the gayest in the land"
+    "warp":{"des":"teleport","range":"100ft"}
     },
         "Second Level":{
-        "Make Gay":"make someone gay"
+        "explode":{"des":"boom","range":"100ft"}
         }
 }
 import discord
@@ -40,13 +40,27 @@ async def spells():
     emb = discord.Embed(title = "SpellBook",type = "rich",description = "The Discord spellbook")
     for field in spelld:
         fdata = ""
-        for spell in spelld[field]:
-            print(spell)
-            fdata += spell + "\n"
+        for spelli in spelld[field]:
+            print(spelli)
+            fdata += spelli + "\n"
             fdata = fdata[:-1]
         emb.add_field(name=field, value=fdata)
     await bot.say("",embed=emb)
 @bot.command()
 async def spell(*, spell: str):
+    try:
+        cat, spelli = map(str,spell.split(":"))
+    except:
+        await bot.say("Spell format is catigory:spellname")
+        return
+    if not cat in spelld:
+        await bot.say("That catigory does not exist!")
+        return
+    spelll = spelld[cat]
+    if not spelli in spelll:
+        await bot.say("That spell does not exist")
+        return
+    thespell = spelll[spelli]
+
     await bot.say("I would respond, but the \"{}\" spell is smelly".format(spell))
 bot.run(token)
