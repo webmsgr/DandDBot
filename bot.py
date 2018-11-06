@@ -48,5 +48,5 @@ async def spells():
     await bot.say("",embed=emb)
 @bot.command()
 async def spell(*, spell: str):
-    await bot.say("I would respond, but the \"{}\" spell is smelly")format(spell))
+    await bot.say("I would respond, but the \"{}\" spell is smelly".format(spell))
 bot.run(token)
