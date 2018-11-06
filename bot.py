@@ -48,6 +48,7 @@ async def spells():
     await bot.say("",embed=emb)
 @bot.command()
 async def spell(*, spell: str):
+    '''Get info on a spell'''
     try:
         cat, spelli = map(str,spell.split(":"))
     except:
@@ -65,4 +66,26 @@ async def spell(*, spell: str):
     for thing in thespell:
         emb.add_field(name=thing,value=thespell[thing])
     await bot.say("",embed=emb)
+@bot.command()
+async def search(*, spellLook: str):
+    '''Search the database'''
+    spelll = []
+    matched = []
+    for cat in spelld:
+        for spell in spelld[cat]:
+            spelll.append("{}:{}".format(cat,spell))
+    for spell in spelll:
+        if spell.split(":")[1].lower() == spellLook.lower():
+            matched.append(spell)
+    if matched == []:
+        await bot.say("No results!")
+    else:
+        emb = discord.Embed(title = "Search Results", type = "rich", description = "Search results for {}".format(spellLook))
+        out = ""
+        for matchedspell in matched:
+            out += "!spell {}\n".format(matchedspell)
+        out = out[:-1]
+        emb.add_field(name="Results",value=out)
+        await bot.say("",embed=emb)
+
 bot.run(token)
