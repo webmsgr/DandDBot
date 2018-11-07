@@ -48,7 +48,7 @@ async def spell(*, spell: str):
         await bot.say("That spell does not exist")
         return
     thespell = spelll[spelli]
-    emb = discord.Embed(title = spelli,type = "rich", description = thespell.pop("desc"))
+    emb = discord.Embed(title = spelli,type = "rich", description = thespell.pop("Desc"))
     for thing in thespell:
         emb.add_field(name=thing,value=thespell[thing])
     await bot.say("",embed=emb)
