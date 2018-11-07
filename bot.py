@@ -50,7 +50,7 @@ async def spell(*, spell: str):
     thespell = spelll[spelli]
     emb = discord.Embed(title = spelli,type = "rich", description = thespell.pop("desc"))
     for thing in thespell:
-        emb.add_field(name=thing.capitalize(),value=thespell[thing])
+        emb.add_field(name=thing.capitalize().replace("_"," "),value=thespell[thing])
     await bot.say("",embed=emb)
 @bot.command()
 async def search(*, spellLook: str):
