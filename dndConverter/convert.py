@@ -24,8 +24,8 @@ for spell in data:
     if not cat in out:
         out[cat] = {}
     for thing in spell:
-        spell[thing] = removetags(spell[thing])
-    out[cat][name.capitalize()] = spell
+        spell[thing] = removetags(spell[thing]).capitalize()
+    out[cat][name] = spell
 out = json.dumps(out)
 d = open("../spells.json","w")
 d.write(out)
