@@ -24,6 +24,8 @@ for spell in data:
     if not cat in out:
         out[cat] = {}
     for thing in spell:
+        if len(spell[thing]) > 1024:
+            spell[thing] = spell[thing][:-4] + "..."
         spell[thing] = removetags(spell[thing])
     out[cat][name] = spell
 out = json.dumps(out)
