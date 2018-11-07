@@ -66,8 +66,8 @@ async def search(*, spellLook: str):
     if matched == []:
         await bot.say("No results!")
     else:
-        if len(matched) > 100:
-            await bot.say("More then 100 results! ({}) Narrow your search and try again.".format(len(matched)))
+        if len(matched) > 20:
+            await bot.say("More then 20 results! ({}) Narrow your search and try again.".format(len(matched)))
             return
         emb = discord.Embed(title = "Search Results", type = "rich", description = "Search results for {}".format(spellLook),color = color)
         out = ""
