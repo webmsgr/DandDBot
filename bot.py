@@ -1,14 +1,12 @@
 #! python3
-import os
+import os,sys,json
 if not "key.secret" in os.listdir():
     print("Please create key.secret and put your discord bot key inside.")
-spelld = {"First Level":{
-    "Warp":{"desc":"Teleport anywhere","Range":"100ft"}
-    },
-        "Second Level":{
-        "Explode":{"desc":"Go boom","Range":"Self"}
-        }
-}
+    sys.exit(0)
+if not "spells.json" in os.listdir():
+    print("Please build spells.")
+    sys.exit(0)
+spelld = json.load(open("spells.json"))
 import discord
 from discord.ext import commands
 import random
@@ -34,18 +32,6 @@ async def rolldice(dicestring):
     for item in dice:
         total += item
     await bot.say(str(dice).replace("[","").replace("]","").replace(","," + ") + " = {}".format(total))
-@bot.command()
-async def spells():
-    '''Print the spell database'''
-    emb = discord.Embed(title = "SpellBook",type = "rich",description = "The Discord spellbook")
-    for field in spelld:
-        fdata = ""
-        for spelli in spelld[field]:
-            print(spelli)
-            fdata += spelli + "\n"
-            fdata = fdata[:-1]
-        emb.add_field(name=field, value=fdata)
-    await bot.say("",embed=emb)
 @bot.command()
 async def spell(*, spell: str):
     '''Get info on a spell'''
@@ -75,7 +61,7 @@ async def search(*, spellLook: str):
         for spell in spelld[cat]:
             spelll.append("{}:{}".format(cat,spell))
     for spell in spelll:
-        if spell.split(":")[1].lower() == spellLook.lower():
+        if spellLook.lower() in spell.split(":")[1].lower() :
             matched.append(spell)
     if matched == []:
         await bot.say("No results!")
