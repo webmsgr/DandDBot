@@ -25,7 +25,7 @@ for spell in data:
         out[cat] = {}
     for thing in spell:
         spell[thing] = removetags(spell[thing])
-    out[cat][name] = spell
+    out[cat][name.capitalize()] = spell
 out = json.dumps(out)
 d = open("../spells.json","w")
 d.write(out)
