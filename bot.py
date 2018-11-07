@@ -76,5 +76,10 @@ async def search(*, spellLook: str):
         out = out[:-1]
         emb.add_field(name="Results",value=out)
         await bot.say("",embed=emb)
-
+@bot.command()
+async def reload():
+    '''Reload all the spells'''
+    global spelld
+    spelld = json.load(open("spells.json"))
+    await bot.say("All spells reloaded.")
 bot.run(token)
