@@ -10,7 +10,7 @@ spelld = json.load(open("spells.json"))
 import discord
 from discord.ext import commands
 import random
-
+color = 0x008040
 description = '''A D&D Bot'''
 bot = commands.Bot(command_prefix='!', description=description)
 token = open("key.secret").read().strip()
@@ -48,7 +48,7 @@ async def spell(*, spell: str):
         await bot.say("That spell does not exist")
         return
     thespell = spelll[spelli]
-    emb = discord.Embed(title = spelli,type = "rich", description = thespell.pop("desc"))
+    emb = discord.Embed(title = spelli,type = "rich", description = thespell.pop("desc"),color = color)
     for thing in thespell:
         emb.add_field(name=thing.capitalize().replace("_"," "),value=thespell[thing])
     await bot.say("",embed=emb)
@@ -69,7 +69,7 @@ async def search(*, spellLook: str):
         if len(matched) > 100:
             await bot.say("More then 100 results! ({}) Narrow your search and try again.".format(len(matched)))
             return
-        emb = discord.Embed(title = "Search Results", type = "rich", description = "Search results for {}".format(spellLook))
+        emb = discord.Embed(title = "Search Results", type = "rich", description = "Search results for {}".format(spellLook),color = color)
         out = ""
         for matchedspell in matched:
             out += "!spell {}\n".format(matchedspell)
